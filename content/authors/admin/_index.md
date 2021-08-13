@@ -3,25 +3,20 @@ bio: My research interests include distributed robotics, mobile computing and pr
   matter.
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
+  - course: Quantitative Methods & Finance/Accounting Bachelors
+    institution: Babson College
+    year: 2002
+  - course: Chartered Financial Analyst 
+    institution: 
     year: 2008
-email: ""
+email: "brent.crossman@gmail.com"
 highlight_name: false
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Fantasy Sports
+- Gaming
+- Squash
 organizations:
-- name: Stanford University
-  url: https://www.stanford.edu/
-role: Professor of Artificial Intelligence
+role: Owner Old Port Consulting, LLC
 social:
 - icon: envelope
   icon_pack: fas
@@ -31,22 +26,17 @@ social:
   icon: twitter
   icon_pack: fab
   label: Follow me on Twitter
-  link: https://twitter.com/GeorgeCushen
-- icon: graduation-cap
-  icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: https://twitter.com/brentcrossman
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/bcrossman
 - icon: linkedin
   icon_pack: fab
-  link: https://www.linkedin.com/
+  link: https://www.linkedin.com/in/brent-crossman-5785523/
 superuser: true
-title: Nelson Bighetti
+title: Brent Crossman
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Brent Crossman owns Old Port Consulting, LLC a transaction services firm focused on providing due diligence and financial analysis to middle market capital providers. Combining private equity experience with accounting resources, OPC ensures capital providers have a complete picture of the company before making an investment. In addition, Old Port Consulting can also work with senior executives to improve their internal and external reporting, keeping the management team, lenders and investors on the same page. Lastly, Old Port Consulting can lend data analytic expertise to leverage the recent advances in machine learning and predictive analytics.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
