@@ -45,7 +45,7 @@ player_data <-
   read_csv("players.csv") %>% 
   select(sort(current_vars())) %>% 
   select(team, firstName, lastName, position, playerBestOvr,contractSalary, 
-         contractBonus, contractLength, everything())
+         contractBonus, contractLength, capHit, everything())
 ```
 
     ## Warning: `current_vars()` was deprecated in dplyr 0.8.4.
@@ -126,7 +126,63 @@ player_data_2 <-
   left_join(simple_positions_df, by = "group_position")
 ```
 
-For this first analysis we’ll use the sum of contract salary and contract bonus divided by contract length to give a rough estimate of “spent.” We can also use the supplied value of CapHit as potentially a more specific level of expense for this season.
+## Cap Hit or Salary + Bonus
+
+We have to make a decision, how do we want to look at the investment a team is making in a player. This gets complex, and over my head, when you take in to account guaranteed and non-guaranteed money and unusually structured contracts. Let’s look at two metrics, the first is Madden’s variable called CapHit vs the sum of contract salary and contract bonus divided by contract length to give a rough estimate of “spent.”
+
+``` r
+player_data_2 %>%
+  mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
+  mutate(diff = capHit-avg_cost) %>% 
+  arrange(diff) %>% 
+  top_n(10) %>% 
+  select(team:capHit, avg_cost, diff)
+```
+
+    ## Selecting by diff
+
+    ## # A tibble: 10 x 11
+    ##    team     firstName lastName position playerBestOvr contractSalary contractBonus
+    ##    <chr>    <chr>     <chr>    <chr>            <dbl>          <dbl>         <dbl>
+    ##  1 Steelers Ezekiel   Elliott  HB                  96       59300000             0
+    ##  2 Vikings  Jalen     Ramsey   CB                  99       71000000             0
+    ##  3 Saints   Pen       Sewell   LT                  88       23780000             0
+    ##  4 Seahawks Travis    Kelce    TE                  95       54000000             0
+    ##  5 Bengals  Jordan    Love     QB                  99      117610000     148400000
+    ##  6 Ravens   Trevor    Lawrence QB                  98       34780000      24600000
+    ##  7 Patriots Justin    Fields   QB                  94       34060000      22600000
+    ##  8 Saints   Alvin     Kamara   HB                  99       54800000      22580000
+    ##  9 Jaguars  Joey      Bosa     LE                  99       72860000             0
+    ## 10 Giants   Patrick   Mahomes  QB                  99      123850000             0
+    ## # ... with 4 more variables: contractLength <dbl>, capHit <dbl>,
+    ## #   avg_cost <dbl>, diff <dbl>
+
+``` r
+player_data_2 %>%
+  mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
+  mutate(diff = capHit-avg_cost) %>% 
+  arrange(diff) %>% 
+  top_n(-10) %>% 
+  select(team:capHit, avg_cost, diff)
+```
+
+    ## Selecting by diff
+
+    ## # A tibble: 10 x 11
+    ##    team      firstName lastName   position playerBestOvr contractSalary contractBonus
+    ##    <chr>     <chr>     <chr>      <chr>            <dbl>          <dbl>         <dbl>
+    ##  1 Browns    DeForest  Buckner    DT                  96       26460000             0
+    ##  2 Browns    David     Bakhtiari  LT                  95       37920000             0
+    ##  3 Cardinals Kyler     Murray     QB                  99      110350000     115600000
+    ##  4 Lions     Taylor    Decker     LT                  78       18520000       4170000
+    ##  5 49ers     Arik      Armstead   LE                  85       35240000      17280000
+    ##  6 Texans    Zach      Cunningham MLB                 79       24400000       9330000
+    ##  7 Bears     Laremy    Tunsil     LT                  89       50100000             0
+    ##  8 Bears     Eddie     Jackson    FS                  87       31150000      13480000
+    ##  9 Cowboys   Amari     Cooper     WR                  95       59200000      29520000
+    ## 10 Texans    Will      Fuller V   WR                  81       22470000      12920000
+    ## # ... with 4 more variables: contractLength <dbl>, capHit <dbl>,
+    ## #   avg_cost <dbl>, diff <dbl>
 
 ``` r
 player_data_2 %>%
@@ -146,7 +202,7 @@ player_data_2 %>%
 
     ## `summarise()` has grouped output by 'team'. You can override using the `.groups` argument.
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 We could also look at it on a percentage basis and stack the bar chart
 
@@ -170,4 +226,4 @@ player_data_2 %>%
 
     ## `summarise()` has grouped output by 'team'. You can override using the `.groups` argument.
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" />

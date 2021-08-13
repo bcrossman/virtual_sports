@@ -45,7 +45,7 @@ player_data <-
   read_csv("players.csv") %>% 
   select(sort(current_vars())) %>% 
   select(team, firstName, lastName, position, playerBestOvr,contractSalary, 
-         contractBonus, contractLength, everything())
+         contractBonus, contractLength, capHit, everything())
 
 
 ```
@@ -128,7 +128,31 @@ player_data_2 <-
 
 ```
 
-For this first analysis we'll use the sum of contract salary and contract bonus divided by contract length to give a rough estimate of "spent".  We can also use the supplied value of CapHit as potentially a more specific level of expense for this season.
+## Cap Hit or Salary + Bonus
+
+We have to make a decision, how do we want to look at the investment a team is making in a player.  This gets complex, and over my head, when you take in to account guaranteed and non-guaranteed money and unusually structured contracts.  Let's look at two metrics, the first is Madden's variable called CapHit vs the sum of contract salary and contract bonus divided by contract length to give a rough estimate of "spent".
+
+
+```{r}
+
+player_data_2 %>%
+  mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
+  mutate(diff = capHit-avg_cost) %>% 
+  arrange(diff) %>% 
+  top_n(10) %>% 
+  select(team:capHit, avg_cost, diff)
+
+player_data_2 %>%
+  mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
+  mutate(diff = capHit-avg_cost) %>% 
+  arrange(diff) %>% 
+  top_n(-10) %>% 
+  select(team:capHit, avg_cost, diff)
+
+
+
+```
+
 
 
 ```{r}

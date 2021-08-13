@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 *.Rproj
+/public/
+/resources/
+.DS_Store
+Thumbs.db
