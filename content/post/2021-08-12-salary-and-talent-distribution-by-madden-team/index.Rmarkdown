@@ -18,9 +18,7 @@ projects: []
 ---
 
 
-## Intro
-
-As much as I use R and Data Analysis in my day job, I find that sports games (like Madden) or fantasy sports (football, baseball, etc.) are the best sandbox to learn and practice data analysis skills.  This post will focus on data visualization techniques using Madden data from the Madden 22 EA Sports games release to understand the distribution of talent and skill across teams.
+As much as I use R and Data Analysis in my day job, I find that sports games (like Madden) or fantasy sports (football, baseball, etc.) are the best sandbox to learn and practice data analysis skills.  This post will focus on data visualization techniques using Madden data from the Madden 21 EA Sports game to understand the distribution of talent and skill across teams.
 
 ## Package Load
 
@@ -130,7 +128,7 @@ player_data_2 <-
 
 ## Cap Hit or Salary + Bonus
 
-We have to make a decision, how do we want to look at the investment a team is making in a player.  This gets complex, and over my head, when you take in to account guaranteed and non-guaranteed money and unusually structured contracts.  Let's look at two metrics, the first is Madden's variable called CapHit vs the sum of contract salary and contract bonus divided by contract length to give a rough estimate of "spent".
+First decision, how do we want to look at the investment a team is making in a player.  This gets complex, and over my head, when you take in to account guaranteed and non-guaranteed money and unusually structured contracts.  Let's look at two metrics, the first is Madden's variable called CapHit vs the sum of contract salary and contract bonus divided by contract length to give a rough estimate of "spent".
 
 
 ```{r}
@@ -140,20 +138,26 @@ player_data_2 %>%
   mutate(diff = capHit-avg_cost) %>% 
   arrange(diff) %>% 
   top_n(10) %>% 
-  select(team:capHit, avg_cost, diff)
+    select(team:playerBestOvr, capHit, avg_cost, diff) %>% 
+
+bind_rows(
 
 player_data_2 %>%
   mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
   mutate(diff = capHit-avg_cost) %>% 
   arrange(diff) %>% 
   top_n(-10) %>% 
-  select(team:capHit, avg_cost, diff)
-
+  select(team:playerBestOvr, capHit, avg_cost, diff)
+) %>% 
+  mutate_if(is.numeric, scales::comma) 
 
 
 ```
 
+So I feel like on some contracts, like Mahomes, the CapHit seems artificially low, likely how Madden dealt with the rookie contract.  For other players,like Stephon Gilmore the CapHit seems right but the avg_cost is thrown off by early contract years.  I think for simplicity I'm going to use average cost because the CapHit actually seems a bit more manipulated but this is where, in the real world, you'd spend a lot more time understanding the business need and getting domain experts.  
 
+
+Let's look at how the average annual cost is being allocated between offense
 
 ```{r}
 
@@ -196,4 +200,48 @@ player_data_2 %>%
 
 ```
 
+This suggests the Cowboys are most allocated towards offense and the Ravens most towards defense. Let's look at treemap of how much each of these teams spends by position vs the other teams (averaged)
 
+```{r}
+
+  
+  player_data_2 %>%
+  mutate(team = if_else(team %in% c("Cowboys", "Ravens"), team, "Avg Team")) %>% 
+  mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
+  group_by(team, group_position) %>% 
+  summarise(avg_cost = sum(avg_cost))%>%
+  group_by(team) %>% 
+  arrange(team, desc(avg_cost)) %>%
+  ggplot(aes(area = avg_cost, fill = group_position, label = group_position, subgroup = team)) +
+  geom_treemap() +
+  geom_treemap_text(grow = T, reflow = T, colour = "black") +
+                  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom") +
+  facet_wrap( ~ team) +
+  labs(
+    title = "Salary by position",
+    caption = "Data downloaded by someone with too much time",
+    fill = "Team"
+  )
+
+```
+
+I'm not sure if that format is better or a bar chart.  You choose
+
+```{r}
+
+ player_data_2 %>%
+  mutate(team = if_else(team %in% c("Cowboys", "Ravens"), team, "Avg Team")) %>% 
+  mutate(avg_cost = (contractSalary+contractBonus) / contractLength) %>% 
+  group_by(team, group_position) %>% 
+  summarise(avg_cost = sum(avg_cost))%>%
+  group_by(team) %>% 
+  mutate(avg_cost = avg_cost/sum(avg_cost)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = group_position, y = avg_cost, group=team, fill=team))+
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_y_continuous(limits = c(0,NA), labels = scales::percent)
+
+```
+
+So Ravens are invested in Defensive Backs and Linebackers.  Cowboys invested just a bit more in almost all offensive position (OL, QB, RB, WR) than the average team.

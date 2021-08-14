@@ -24,14 +24,14 @@ email: brent.crossman@gmail.com
 phone: 
 address:
   street: 
-  city: Cumberland
+  city: Portland
   region: ME
-  postcode: '04021'
+  postcode: '04101'
   country: United States
   country_code: US
 coordinates:
-  latitude: '43.7966'
-  longitude: '-70.2585'
+  latitude: '43.65607'
+  longitude: '-70.26145'
 
 appointment_url: 
 contact_links:
