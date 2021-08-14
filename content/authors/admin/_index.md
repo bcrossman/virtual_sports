@@ -1,6 +1,5 @@
 ---
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: Born, raised and living in Maine with a detour through Massachusetts to get a great Finance/Accounting education at Babson College and gain experience working in private equity for 15 years before starting my own consulting company focused on due diligence and data analysis services.
 education:
   courses:
   - course: Quantitative Methods & Finance/Accounting Bachelors

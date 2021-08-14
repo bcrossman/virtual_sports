@@ -1,9 +1,10 @@
 ---
 widget: hero
 headless: true
+active: false
 weight: 10
-title: Hugo Academic Starter
-hero_media: hero-academic.png
+title: DowneasteR
+hero_media: IMG_20200807_191604.png
 cta:
   label: '**Get Started**'
   url: https://wowchemy.com/templates/

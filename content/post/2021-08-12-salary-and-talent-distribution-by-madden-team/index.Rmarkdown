@@ -4,7 +4,7 @@ author: ''
 date: '2021-08-12'
 slug: salary-and-talent-distribution-by-madden-team
 categories: []
-tags: []
+tags: ['data visualization', 'madden', 'nfl']
 subtitle: ''
 summary: ''
 authors: []
@@ -83,7 +83,7 @@ display_table(player_data) %>% widgetframe::frameWidget()
 
 ## Salary Distribution
 
-Let's start by creating a few cross-walks to help summarize and simplifiy the data.
+Let's start by creating a few cross-walks to help summarize and simplify the data.
 
 The first will be grouping positions to a more simplified level
 
