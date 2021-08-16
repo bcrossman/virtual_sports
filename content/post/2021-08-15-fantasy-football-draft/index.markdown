@@ -69,11 +69,11 @@ offense_proj <- read_csv("offense_proj.csv", skip = 1)
     ## * Yds -> Yds...16
     ## * ...
 
-    ## Rows: 241 Columns: 24
+    ## Rows: 268 Columns: 24
 
     ## -- Column specification --------------------------------------------------------
     ## Delimiter: ","
-    ## chr (24): ...1, Offense, ...3, Forecast, Roster Status, GP*, Bye, Fan Pts, O...
+    ## chr (24): ...1, Offense, ...3, Forecast, Roster Status, GP*, Bye, Fan Pts ,...
 
     ## 
     ## i Use `spec()` to retrieve the full column specification for this data.
@@ -83,6 +83,7 @@ offense_proj <- read_csv("offense_proj.csv", skip = 1)
 offense_proj_slim <- 
   offense_proj %>% 
   janitor::clean_names() %>% 
+  rename(fan_pts = fan_pts_u_e002) %>% 
   select(offense, gp, fan_pts) %>% 
   rename(name = offense)
 
@@ -95,7 +96,7 @@ defense_proj <- read_csv("defense_proj.csv", skip = 1)
     ## * TD -> TD...11
     ## * TD -> TD...22
 
-    ## Rows: 133 Columns: 22
+    ## Rows: 214 Columns: 22
 
     ## -- Column specification --------------------------------------------------------
     ## Delimiter: ","
@@ -150,7 +151,7 @@ clean_df <-
   )
 ```
 
-    ## Warning: Expected 2 pieces. Additional pieces discarded in 339 rows [1, 2, 3, 4,
+    ## Warning: Expected 2 pieces. Additional pieces discarded in 442 rows [1, 2, 3, 4,
     ## 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...].
 
 ## Replacement Level
@@ -229,12 +230,12 @@ replacement_level
     ## # Groups:   position [6]
     ##   position rep_fan_pts
     ##   <chr>          <dbl>
-    ## 1 DB              121.
-    ## 2 LB              123.
-    ## 3 QB              255.
+    ## 1 DB              163.
+    ## 2 LB              164.
+    ## 3 QB              242.
     ## 4 RB              165.
-    ## 5 TE              121.
-    ## 6 WR              162.
+    ## 5 TE              118.
+    ## 6 WR              160.
 
 ## Attach Replacement Level and Rank
 

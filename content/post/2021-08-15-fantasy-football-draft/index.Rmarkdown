@@ -62,6 +62,7 @@ offense_proj <- read_csv("offense_proj.csv", skip = 1)
 offense_proj_slim <- 
   offense_proj %>% 
   janitor::clean_names() %>% 
+  rename(fan_pts = fan_pts_u_e002) %>% 
   select(offense, gp, fan_pts) %>% 
   rename(name = offense)
 
