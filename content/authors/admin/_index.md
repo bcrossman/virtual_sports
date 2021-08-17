@@ -37,5 +37,3 @@ title: Brent Crossman
 ---
 
 Brent Crossman owns Old Port Consulting, LLC a transaction services firm focused on providing due diligence and financial analysis to middle market capital providers. Combining private equity experience with accounting resources, OPC ensures capital providers have a complete picture of the company before making an investment. In addition, Old Port Consulting can also work with senior executives to improve their internal and external reporting, keeping the management team, lenders and investors on the same page. Lastly, Old Port Consulting can lend data analytic expertise to leverage the recent advances in machine learning and predictive analytics.
-
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
