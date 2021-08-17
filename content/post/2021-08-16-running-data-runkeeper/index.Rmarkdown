@@ -100,7 +100,7 @@ clean_data %>%
 
 So this is making it a bit more clear, Thursday, our fastest pace is a day when we've historically not run warmups or cooldowns as we do mile segments. So the pace has converged to that recenty because we've stopped recording the warmups and cooldowns on them as well.
 
-Last little thing, let's look at our total distance ran by month
+Last little thing, let's look at that total distance we ran by month:
 
 ```{r}
 
