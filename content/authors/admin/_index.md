@@ -15,7 +15,7 @@ interests:
 - Gaming
 - Squash
 organizations:
-role: Owner Old Port Consulting, LLC
+role: Owner, Old Port Consulting, LLC
 social:
 - icon: envelope
   icon_pack: fas
