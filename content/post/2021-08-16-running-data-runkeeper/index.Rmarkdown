@@ -124,7 +124,7 @@ clean_data %>%
 
 ## Update
 
-I got thinking that I didn't love the above numbers because they were really thrown off by walking, particularly the warmups and cooldowns.  I have the raw GPX files that I'm going to try and exclude the "walking" periods. I want upload that data to github because it shows exactly where I am and at one times for each day and as Tupac says 
+I got thinking that I didn't love the above numbers because they were really thrown off by walking, particularly the warmups and cooldowns.  I have the raw GPX files, so I'm going to try and exclude the "walking" periods and rerun this anaysis. I won't upload that data to github because it shows exactly where I am and at one times for each day and as Tupac says 
 
 "I always got to worry 'bout the pay backs 
 Some buck that I roughed up way back
