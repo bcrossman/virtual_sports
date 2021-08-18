@@ -23,7 +23,10 @@ My wife and I have been running for a little over a year.  I know the data isn't
 
 
 ```r
+library(raster)
 library(tidyverse)
+library(lubridate)
+library(plotKML)
 ```
 
 ## Data Read
@@ -168,11 +171,86 @@ clean_data %>%
   geom_bar(stat="identity") + 
   geom_text(aes(label = Total_Distance), vjust = 1.5, colour = "white")+
   theme(
-     axis.text.x=element_text(angle=60,hjust=1),
-     legend.position = "none")
+    axis.text.x=element_text(angle=60,hjust=1),
+    legend.position = "none")
 ```
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
+## Update
+
+I got thinking that I didn't love the above numbers because they were really thrown off by walking, particularly the warmups and cooldowns.  I have the raw GPX files that I'm going to try and exclude the "walking" periods. I want upload that data to github because it shows exactly where I am and at one times for each day and as Tupac says 
+
+"I always got to worry 'bout the pay backs 
+Some buck that I roughed up way back
+Comin' back after all these years"
 
 
+```r
+file_list <- dir("./gps_data")
+
+gps_df_list <- list()
+
+for(file_name in file_list){
+  df <- readGPX(paste0("./gps_data/", file_name))$tracks[[1]][[1]]
+  
+  df$distance <- NA
+  
+  for(i in 2:nrow(df)){
+    df$distance[i] <-pointDistance(p1 = c(df$lon[i],df$lat[i]), 
+                              p2 = c(df$lon[i-1],df$lat[i-1])
+                              ,
+                              lonlat = T)/1609.34  
+  }
+  
+  df <- 
+    df %>% 
+    # mutate(distance = 69.0975851*sqrt(
+    #   ((lon-lag(lon))*cos(lag(lat)))^2+
+    #     (lat-lag(lat))^2)) %>% 
+    mutate(time_fixed = lubridate::as_datetime(time)) %>% 
+    mutate(time_elapsed = 60*as.numeric(time_fixed-lag(time_fixed), 
+                                        units="hours")) %>% 
+    mutate(pace = (time_elapsed)/distance) %>% 
+    select(pace, distance, time_elapsed, ele) %>% 
+    mutate(`GPX File` = file_name)
+  
+  gps_df_list[[file_name]] <- df
+}
+
+gps_df <- bind_rows(gps_df_list)
+
+
+only_run <- 
+  gps_df %>% 
+  group_by(`GPX File`) %>% 
+  filter(pace<13) %>% 
+  summarise(avg_pace = median(pace, na.rm=T),
+            total_distance = sum(distance)) %>% 
+  filter(total_distance>2) %>% 
+  filter(`GPX File` != "2021-07-04-072622.gpx")
+```
+
+Ok, let's re-run the analysis by distance and see what this shows
+
+
+```r
+clean_data %>% 
+  left_join(only_run) %>% 
+  filter(distance != "Medium") %>% 
+  ggplot(aes(x = Date, y = avg_pace, color=distance)) +
+  geom_point()+
+  geom_smooth(se =T)
+```
+
+```
+## Joining, by = "GPX File"
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+I think the error bars make it clear that my pace isn't not significantly different between the short and long runs, interestingly. Also my long run pace has been constant. Strangely this implies my short runs have slowed down a bit.  
