@@ -123,7 +123,7 @@ We need to figure out what the worst likely remaining player will be by position
 
 required_depth <- readxl::read_xlsx("starting_position.xlsx")
 
-num_teams <- 8
+num_teams <- 10
 
 required_depth$tot_start <- required_depth$tot_start*num_teams
 

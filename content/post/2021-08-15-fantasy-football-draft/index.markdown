@@ -161,7 +161,7 @@ We need to figure out what the worst likely remaining player will be by position
 ``` r
 required_depth <- readxl::read_xlsx("starting_position.xlsx")
 
-num_teams <- 8
+num_teams <- 10
 
 required_depth$tot_start <- required_depth$tot_start*num_teams
 
@@ -226,16 +226,17 @@ replacement_level <-
 replacement_level
 ```
 
-    ## # A tibble: 6 x 2
-    ## # Groups:   position [6]
+    ## # A tibble: 7 x 2
+    ## # Groups:   position [7]
     ##   position rep_fan_pts
     ##   <chr>          <dbl>
-    ## 1 DB              163.
-    ## 2 LB              164.
-    ## 3 QB              242.
-    ## 4 RB              165.
-    ## 5 TE              118.
-    ## 6 WR              160.
+    ## 1 DB              154.
+    ## 2 DT              161.
+    ## 3 LB              155.
+    ## 4 QB              222.
+    ## 5 RB              139.
+    ## 6 TE              100.
+    ## 7 WR              137.
 
 ## Attach Replacement Level and Rank
 
