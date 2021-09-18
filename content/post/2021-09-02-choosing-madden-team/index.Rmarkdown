@@ -1,0 +1,54 @@
+---
+title: Choosing Madden Team
+author: Brent Crossman
+date: '2021-09-02'
+slug: choosing-madden-team
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2021-09-02T13:16:01-04:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+So I've been a bit stumped how I wanted to build this blog post. The end product is a flexdashboard / shiny app that will encompass a lot of the analysis I do for my madden CFM (connected franchise mode).  The league is just a friendly one that was started during the pandemic but I find the EA Madden game a fertile ground for practicing data analysis.  The issue in this case is that the analysis is best done interactively and I prefer the flexdashboard approach over building a more traditional shiny app.  The final product can be seen here:  
+
+## Package Load
+
+```{r setup, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+library(DT)
+library(widgetframe)
+library(testthat)
+library(scales)
+library(janitor)
+library(unglue)
+
+##Functions
+display_table <- function(x){
+  table_output <- 
+    DT::datatable(as.data.frame(x),
+                  extensions = 'Buttons',
+                  
+                  options = list(
+                    pageLength=5,
+                    scrollX = TRUE,
+                    dom = 'Bfrtip',
+                    buttons = list(
+                      list(extend = 'collection',
+                           buttons = c('excel', 'csv'),
+                           text = 'DOWNLOAD DATA')
+                    )
+                  )) 
+  
+  table_output
+}
+
+```

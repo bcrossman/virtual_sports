@@ -26,7 +26,6 @@ As much as I use R and Data Analysis in my day job, I find that sports games (li
 
 library(tidyverse)
 library(DT)
-library(widgetframe)
 library(treemapify)
 library(testthat)
 library(scales)
@@ -75,7 +74,7 @@ display_table <- function(x){
   table_output
 }
 
-display_table(player_data) %>% widgetframe::frameWidget()
+display_table(player_data)
 
 ```
 
@@ -245,3 +244,16 @@ I'm not sure if that format is better or a bar chart.  You choose
 ```
 
 So Ravens are invested in Defensive Backs and Linebackers.  Cowboys invested just a bit more in almost all offensive position (OL, QB, RB, WR) than the average team.
+
+```{r echo=FALSE}
+
+htmlwidgets::saveWidget(display_table(player_data), "table.html", selfcontained = T)
+
+```
+
+
+<!--html_preserve-->
+
+<iframe src = "../table.html" width="1" height="1"> </frame>
+
+<!--html_preserve-->

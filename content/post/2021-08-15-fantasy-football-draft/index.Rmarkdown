@@ -25,7 +25,7 @@ I apologize but this is going to be almost a throwaway post. I'm just trying to 
 
 library(tidyverse)
 library(DT)
-library(widgetframe)
+library(htmlwidgets)
 library(testthat)
 library(scales)
 library(janitor)
@@ -62,7 +62,7 @@ offense_proj <- read_csv("offense_proj.csv", skip = 1)
 offense_proj_slim <- 
   offense_proj %>% 
   janitor::clean_names() %>% 
-  rename(fan_pts = fan_pts_u_e002) %>% 
+  rename(fan_pts = fan_pts) %>% 
   select(offense, gp, fan_pts) %>% 
   rename(name = offense)
 
@@ -71,9 +71,9 @@ defense_proj <- read_csv("defense_proj.csv", skip = 1)
 defense_proj_slim <- 
   defense_proj %>% 
   janitor::clean_names() %>% 
-  select(defensive_players, gp, fan_pts_u_e002) %>% 
+  select(defensive_players, gp, fan_pts) %>% 
   rename(name = defensive_players) %>% 
-  rename(fan_pts = fan_pts_u_e002)
+  rename(fan_pts = fan_pts)
 
 proj <- 
   defense_proj_slim %>% 
@@ -195,8 +195,20 @@ final_rank <-
   arrange(desc(value_ovr_rep))
 
 
-display_table(final_rank) %>% widgetframe::frameWidget()
-
+display_table(final_rank) 
 
 ```
 
+
+```{r echo=FALSE}
+
+htmlwidgets::saveWidget(display_table(final_rank), "table.html", selfcontained = T)
+
+```
+
+
+<!--html_preserve-->
+
+<iframe src = "../table.html" width="1" height="1"> </frame>
+
+<!--html_preserve-->
