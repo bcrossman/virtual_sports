@@ -81,6 +81,13 @@ proj <-
 
 ```
 
+Raw projection data:
+
+```{r}
+display_table(proj)
+```
+
+
 My terrible understanding of regex on display in the next section:
 
 ```{r}
@@ -114,6 +121,12 @@ clean_df <-
   )
 
 ```
+
+```{r}
+display_table(clean_df)
+
+```
+
 
 ## Replacement Level
 
