@@ -41,7 +41,7 @@ run_data <- read_csv("cardioActivities.csv")
 ```
 
 ```
-## -- Column specification --------------------------------------------------------
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
 ## chr  (5): Activity Id, Type, Duration, Average Pace, GPX File
 ## dbl  (5): Distance (mi), Average Speed (mph), Calories Burned, Climb (ft), A...
@@ -51,8 +51,8 @@ run_data <- read_csv("cardioActivities.csv")
 
 ```
 ## 
-## i Use `spec()` to retrieve the full column specification for this data.
-## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ```r
@@ -62,20 +62,20 @@ glimpse(run_data)
 ```
 ## Rows: 104
 ## Columns: 14
-## $ `Activity Id`              <chr> "0d7d88b6-e5c8-479f-8494-0c944a5cb415", "36~
-## $ Date                       <dttm> 2021-08-15 07:00:44, 2021-08-12 06:39:07, ~
-## $ Type                       <chr> "Running", "Running", "Running", "Running",~
-## $ `Route Name`               <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
-## $ `Distance (mi)`            <dbl> 6.22, 3.03, 3.12, 6.22, 0.30, 3.02, 3.12, 6~
-## $ Duration                   <chr> "1:02:36", "29:15", "32:23", "1:04:38", "5:~
-## $ `Average Pace`             <chr> "10:04", "9:40", "10:23", "10:24", "17:28",~
-## $ `Average Speed (mph)`      <dbl> 5.96, 6.21, 5.78, 5.77, 3.44, 6.21, 6.07, 6~
-## $ `Calories Burned`          <dbl> 922, 451, 468, 934, 31, 450, 466, 919, 450,~
-## $ `Climb (ft)`               <dbl> 208, 144, 154, 358, 8, 144, 155, 195, 142, ~
-## $ `Average Heart Rate (bpm)` <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
-## $ `Friend's Tagged`          <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
-## $ Notes                      <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,~
-## $ `GPX File`                 <chr> "2021-08-15-070044.gpx", "2021-08-12-063907~
+## $ `Activity Id`              <chr> "0d7d88b6-e5c8-479f-8494-0c944a5cb415", "36…
+## $ Date                       <dttm> 2021-08-15 07:00:44, 2021-08-12 06:39:07, …
+## $ Type                       <chr> "Running", "Running", "Running", "Running",…
+## $ `Route Name`               <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ `Distance (mi)`            <dbl> 6.22, 3.03, 3.12, 6.22, 0.30, 3.02, 3.12, 6…
+## $ Duration                   <chr> "1:02:36", "29:15", "32:23", "1:04:38", "5:…
+## $ `Average Pace`             <chr> "10:04", "9:40", "10:23", "10:24", "17:28",…
+## $ `Average Speed (mph)`      <dbl> 5.96, 6.21, 5.78, 5.77, 3.44, 6.21, 6.07, 6…
+## $ `Calories Burned`          <dbl> 922, 451, 468, 934, 31, 450, 466, 919, 450,…
+## $ `Climb (ft)`               <dbl> 208, 144, 154, 358, 8, 144, 155, 195, 142, …
+## $ `Average Heart Rate (bpm)` <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ `Friend's Tagged`          <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ Notes                      <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ `GPX File`                 <chr> "2021-08-15-070044.gpx", "2021-08-12-063907…
 ```
 
 I want to see how my pace has changed over time among various distance runs. Let's clean up the data a bit to help get that read
@@ -253,4 +253,4 @@ clean_data %>%
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
-I think the error bars make it clear that my pace isn't not significantly different between the short and long runs, interestingly. Also my long run pace has been constant. Strangely this implies my short runs have slowed down a bit.  
+I think the error bars make it clear that my pace is not significantly different between the short and long runs, interestingly. Also my long run pace has been constant. Strangely this implies my short runs have slowed down a bit.  
