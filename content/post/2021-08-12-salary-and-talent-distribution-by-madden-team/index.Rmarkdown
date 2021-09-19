@@ -245,6 +245,7 @@ I'm not sure if that format is better or a bar chart.  You choose
 
 So Ravens are invested in Defensive Backs and Linebackers.  Cowboys invested just a bit more in almost all offensive position (OL, QB, RB, WR) than the average team.
 
+
 ```{r echo=FALSE}
 
 htmlwidgets::saveWidget(display_table(player_data), "table.html", selfcontained = T)
